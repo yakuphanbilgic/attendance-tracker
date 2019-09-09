@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Attendance Tracker</string>
+    <string name="tab_text_1">Monday</string>
+    <string name="tab_text_2">Tuesday</string>
+    <string name="tab_text_3">Wednes</string>
+    <string name="tab_text_4">Thurs</string>
+    <string name="tab_text_5">Frıday</string>
+</resources>

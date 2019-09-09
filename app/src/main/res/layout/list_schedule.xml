@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_horizontal_margin">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        tools:text="Rice Balls"
+        android:padding="5dp"
+        android:layout_gravity="center_vertical"
+        android:id="@+id/selected_food_name"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/rectangle_border"
+        android:drawableLeft="@drawable/ic_add_24dp"
+        android:id="@+id/plus_meal"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:layout_margin="3dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/rectangle_border"
+        android:drawableLeft="@drawable/ic_remove_black"
+        android:id="@+id/minus_meal"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="right"
+        android:text="x 1"
+        android:layout_gravity="center_vertical"
+        android:id="@+id/quantity"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="right"
+        tools:text="455"
+        android:layout_gravity="center_vertical"
+        android:id="@+id/selected_food_amount"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:layout_margin="3dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/rectangle_border"
+        android:drawableLeft="@drawable/ic_close"
+        android:id="@+id/delete_item"/>
+</LinearLayout>
