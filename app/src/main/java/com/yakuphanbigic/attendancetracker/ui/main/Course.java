@@ -4,27 +4,28 @@ import java.io.Serializable;
 
 public class Course implements Serializable{
 
-    private  String mName;
-    private int mAmount;
+    private String mName;
+    private String mDay;
     private int mQuantity;
+
+    public Course(){}
+
+    public Course(String mName, String mDay, int mQuantity) {
+        this.mName = mName;
+        this.mQuantity = mQuantity;
+        this.mDay = mDay;
+    }
 
     public void setmQuantity(int mQuantity) {
         this.mQuantity = mQuantity;
     }
 
-    public Course(){}
-
-    public Course(String mName) {
-        this.mName = mName;
-        this.mQuantity = 0;
+    public String getmDay() {
+        return mDay;
     }
 
     public String getmName() {
         return mName;
-    }
-
-    public int getmAmount() {
-        return mAmount;
     }
 
     public int getmQuantity(){
@@ -36,7 +37,7 @@ public class Course implements Serializable{
     }
 
     public void removeFromQuantity(){
-        if(this.mQuantity > 1){
+        if(this.mQuantity >= 0){
             this.mQuantity -= 1;
         }
     }
