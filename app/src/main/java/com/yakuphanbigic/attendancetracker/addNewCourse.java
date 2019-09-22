@@ -23,6 +23,9 @@ public class addNewCourse extends AppCompatActivity {
     private Spinner daySpinner;
     private Spinner attendanceSpinner;
     private Button saveButton;
+    private Boolean flagName;
+    private Boolean flagDay;
+    private Boolean flagAttendance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +38,18 @@ public class addNewCourse extends AppCompatActivity {
         saveButton = findViewById(R.id.buttonAdd);
 
         String[] days = new String[] {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
-        Integer[] attendance = new Integer[] {1, 2, 3, 4};
+        final Integer[] attendance = new Integer[] {0, 1, 2, 3, 4};
+
+        flagDay = false;
+        flagName = false;
+        flagAttendance = false;
 
         courseName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
                 if(b){
                     courseName.setText("");
+                    flagName = true;
                 }
             }
         });
@@ -53,6 +61,7 @@ public class addNewCourse extends AppCompatActivity {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 daySpinner.setAdapter(dayAdapter);
+                flagDay = true;
                 return false;
             }
         });
@@ -61,6 +70,7 @@ public class addNewCourse extends AppCompatActivity {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 attendanceSpinner.setAdapter(attendanceAdapter);
+                flagAttendance = true;
                 return false;
             }
         });
@@ -68,12 +78,17 @@ public class addNewCourse extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentToMain = new Intent(getApplicationContext(), MainActivity.class);
-                intentToMain.putExtra("courseName", courseName.getText().toString());
-                intentToMain.putExtra("day", daySpinner.getSelectedItem().toString());
-                intentToMain.putExtra("attendance", attendanceSpinner.getSelectedItem().toString());
+                if(flagDay && flagName &&  flagAttendance && !courseName.getText().toString().equals("")) {
+                    Intent intentToMain = new Intent(getApplicationContext(), MainActivity.class);
+                    intentToMain.putExtra("courseName", courseName.getText().toString());
+                    intentToMain.putExtra("day", daySpinner.getSelectedItem().toString());
+                    intentToMain.putExtra("attendance", attendanceSpinner.getSelectedItem().toString());
 
-                startActivity(intentToMain);
+                    startActivity(intentToMain);
+                }
+                else {
+                    Toast.makeText(addNewCourse.this, "Please complete the form!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

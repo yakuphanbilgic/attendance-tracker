@@ -37,7 +37,7 @@ public class Course implements Serializable{
     }
 
     public void removeFromQuantity(){
-        if(this.mQuantity >= 0){
+        if(this.mQuantity >= 1){
             this.mQuantity -= 1;
         }
     }
