@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // YAKUP
+
         Intent getIntent = getIntent();
         String courseName = getIntent.getStringExtra("courseName");
         String day = getIntent.getStringExtra("day");
