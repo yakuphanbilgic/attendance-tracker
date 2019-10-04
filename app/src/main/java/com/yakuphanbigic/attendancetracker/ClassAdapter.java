@@ -1,7 +1,9 @@
 package com.yakuphanbigic.attendancetracker;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -164,38 +166,47 @@ public class ClassAdapter extends ArrayAdapter<Course>{
 
         removeMeal.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                SharedPreferences mPrefs = context.getSharedPreferences("myPrefs", MODE_PRIVATE);
-                SharedPreferences.Editor prefsEditor = mPrefs.edit();
-                String id = mPrefs.getString("id", "");
-                String json = "";
+            public void onClick(final View view) {
+                new AlertDialog.Builder(view.getRootView().getContext())
+                        .setTitle("Remove Course")
+                        .setMessage("Do you really want to delete this course?")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(R.string.dialog_yes, new DialogInterface.OnClickListener() {
 
-                for(int i = 1; i < Integer.valueOf(id); i++){
-                    Course currentCourse = new Course();
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                SharedPreferences mPrefs = context.getSharedPreferences("myPrefs", MODE_PRIVATE);
+                                SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                                String id = mPrefs.getString("id", "");
+                                String json = "";
 
-                    final ObjectMapper mapper2 = new ObjectMapper();
-                    try {
-                        json = mPrefs.getString("course" + i , "");
-                        currentCourse = mapper2.readValue(json, Course.class);
+                                for(int i = 1; i < Integer.valueOf(id); i++){
+                                    Course currentCourse = new Course();
 
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                                    final ObjectMapper mapper2 = new ObjectMapper();
+                                    try {
+                                        json = mPrefs.getString("course" + i , "");
+                                        currentCourse = mapper2.readValue(json, Course.class);
 
-                    if(json != "" && currentCourse.getmName().equals(list.get(position).getmName())) {
-                        Toast.makeText(context, "removed " + list.get(position).getmName(), Toast.LENGTH_SHORT).show();
-                        list.remove(position);
-                        prefsEditor.remove("course" + i);
-                        prefsEditor.commit();
-                        break;
-                    }
-                }
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
 
-                notifyDataSetChanged();
+                                    if(json != "" && currentCourse.getmName().equals(list.get(position).getmName())) {
+                                        Toast.makeText(context, "removed " + list.get(position).getmName(), Toast.LENGTH_SHORT).show();
+                                        list.remove(position);
+                                        prefsEditor.remove("course" + i);
+                                        prefsEditor.commit();
+                                        break;
+                                    }
+                                }
+
+                                notifyDataSetChanged();
+                            }})
+                        .setNegativeButton(android.R.string.no, null).show();
             }
         });
 
+
         return listItemView;
     }
-
 }
